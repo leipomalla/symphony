@@ -46,9 +46,22 @@ Class Linkki {
     public function getOtsikko(){
         return $this->otsikko;
     }
+    public function setKuvaus($kuvaus){
+       $this->kuvaus =  $kuvaus;
+    }
+    public function getKuvaus(){
+        return $this->kuvaus;
+    }
+    public function setAvainsana($avainsana){
+       $this->avainsana = $avainsana;
+    }
+    public function getAvainsana(){
+        return $this->avainsana;
+    }
     public function tulostaTiedot(){
         echo "Linkin id on " . $this->id . ", osoite " . $this->getLinkki() .". 
-        Sivun otsikko on " . $this->getOtsikko()
+        Sivun otsikko on " . $this->getOtsikko() . ". <br> Sivun kuvaus: " . $this->getKuvaus()
+        . ". Avainsana: " . $this->getAvainsana() . ".";
     }
 
 }

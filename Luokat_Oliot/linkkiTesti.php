@@ -13,8 +13,11 @@
 
 $linkki1 = new Linkki("$1");
 $linkki1->setLinkki("http://www.mysql.com");
+$linkki1->setOtsikko("MySQL-tietokannan kotisivu");
+$linkki1->setKuvaus("Relaatiotietokanta");
+$linkki1->setAvainsana("mysql");
 $linkki1->tulostaTiedot();
-$linkki1->setOtsikko(”MySQL-tietokannan kotisivu”);
+
 ?>
 
 </body>
