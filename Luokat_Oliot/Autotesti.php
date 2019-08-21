@@ -20,8 +20,16 @@
     $aija->setMalli("Aygo");
     $aija->setVuosi("2013");
 
-    echo $kia->tulostaAutot();
-    echo $aija->tulostaAutot();
+    echo $aija->kaynnista();
+    echo $aija->lisaaBensaa("13");
+    $aija->aja();
+    $aija->aja();
+    echo $aija->sammuta();
+    $aija->tulostaTiedot();
+
+
+    echo $kia->tulostaTiedot();
+    
 
 
     ?>
