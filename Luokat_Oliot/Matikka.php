@@ -28,14 +28,20 @@ Class Matikka{
     public function __contruct(){
      $this->kilokalorit = $kalorit;
     }
-    public function kaloreistaJouleiksi($yksikot){
-        $this->joulet = $yksikot * 4.18400;
-        $this->kilokalorit = $yksikot / 4.18400;
-        echo $yksikot . " kilokaloria on " . $this->joulet . " joulea tai " .$yksikot . " joulea on " . $this->kilokalorit . " kilokaloria.<br>";
+    public function kaloreistaJouleiksi($kalori = 0, $joule = 0){
+        if($kalori == 0){
+            return $joule / 4.1855;
+        }else if ($joule == 0){
+            return $kalori * 4.1855;
+        }else{
+            echo "Joku meni pieleen";
+        }
+
     }
     public function ympyra($sade){
         $pintaala = 3.14 * $sade *$sade;
-        echo "Ympyrän pinta-ala on " . $pintaala . " yksikköä. <br>";
+        return $pintaala;
+        // "Ympyrän pinta-ala on " . $pintaala . " yksikköä. <br>";
     }
     public function suorakulmio($sivu1, $sivu2){
         $pintaala = $sivu1 * $sivu2;

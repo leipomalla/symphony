@@ -17,17 +17,35 @@ class PlayerHealthManager{
     private $currentHP;
     private $maxHP;
 
-    public function __construct($HP){
+    public function __construct(){
+        
+    }
+    public function setCurrentHP($HP){
         $this->currentHP = $HP;
     }
-    public function addPlayerHealth($healthAmmount){
-        $this->currentHP = $this->currentHP + $healthAmmount;
-        return "Pelaajan terveyden määrä on nyt " . $this->currentHP . " yksikkoa.";
+
+    public function setMaxHealth($health){
+        $this->maxHP = $health;
     }
-    public function setMaxHealth(){
-        $this->maxHP = 500;
-        if($this->maxHP > 500){
-            $this->maxHP = 500;
+    public function getCurrentHP(){
+        return $this->currentHP;
+    }
+    public function addPlayerHealth($healthAmmount){
+        if($this->currentHP + $healthAmmount < $this->maxHP){
+            $this->currentHP = $this->currentHP + $healthAmmount;
+        } else {
+            $this->currentHP = $this->maxHP;
         }
+        
+        return "Pelaajan terveyden määrä on nyt " . $this->getCurrentHP() . " yksikkoa. <br>";
+    }
+    
+    public function hurtPlayer($damageToGive){
+        if($this->currentHP - $damageToGive > 0){
+             $this->currentHP = $this->currentHP - $damageToGive;
+        } 
+         
+        return "Pelaajan terveyden määrä satuttamisen jälkeen on " . $this->getCurrentHP() . " yksikkoa.<br>";
+
     }
 }

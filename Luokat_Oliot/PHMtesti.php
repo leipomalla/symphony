@@ -11,9 +11,11 @@
 <body>
 <?php 
 
-$pelaaja1 = new PlayerHealthManager("200");
-echo $pelaaja1->addPlayerHealth("100");
-
+$teemu = new PlayerHealthManager();
+$teemu->setCurrentHP(200);
+$teemu->setMaxHealth(500);
+echo $teemu->hurtPlayer(150);
+echo $teemu->addPlayerHealth(3000);
 
 ?>
 
