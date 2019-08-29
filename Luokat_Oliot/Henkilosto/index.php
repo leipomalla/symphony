@@ -39,6 +39,25 @@
     <th scope="col">Toiminnot</th>
     </tr>
     </thead>
+<tbody>
+    <?php
+      // Tulostetaan kaikki henkilöt
+      foreach($henkilot as $henkilo){
+        $id = $henkilo['henkilonumero'];
+    ?>
+      <tr>
+        <td><?php echo $id ?></th>
+        <td><?php echo $henkilo['etunimi'] ?></td>
+        <td><?php echo $henkilo['sukunimi'] ?></td>
+        <td><?php echo $henkilo['osasto'] ?></td>
+        <td><?php echo $henkilo['palkka'] ?></td>
+        <td><button muuta-id="<?php echo $id ?>" class="btn btn-primary muuta-object"> Muuta
+        <button class="btn btn-danger poista-object"> Poista</td>
+
+    <?php
+      }
+    ?>
+  </tbody>
 
 
 
@@ -50,5 +69,36 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    <script>
+    // Siirry muuta-sivulle
+    $(document).on('click', '.muuta-object', function(){
+      var id = $(this).attr('muuta-id');
+      bootbox.confirm({
+        message: "Oletko varma?",
+        buttons: {
+          confirm: {
+            label: 'Kyllä',
+            className: 'btn-danger'
+          },
+          cancel: {
+            label: 'En',
+            className: 'btn-primary'
+
+          }
+        },
+        callback: function(result){
+          //Painettiinko kyllä-painiketta?
+          if(result ==true){
+            //Kyllä -> muuta-sivulle
+            var url = "muutaHenkilo.php?id=" + id;
+            $(location).attr('href', url);
+
+          }
+        }
+      })
+    })
+    
+    </script>
+    </body>
 </html>

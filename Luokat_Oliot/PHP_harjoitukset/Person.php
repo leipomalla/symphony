@@ -23,6 +23,9 @@ class Henkilo {
     public function setPinkoodi($pincode){
         $this->pinkoodi = $pincode;
     }
+    public function luoYhteysTietokantaan(){
+        
+    }
     public function tulostaHenkilo(){
         return "Henkilön nimi on " . $this->getNimi() . " ja pinkoodi " . $this->getPinkoodi();
     }
