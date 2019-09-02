@@ -8,7 +8,7 @@ class YhteydenHallinta{
     // Tietokannan tiedot on talletettu tähän ominaisuuteen
     private $konfiguraatio;
 
-    public function __construct($konfiguraatio = 'yhteyskonfiguraatio.ini'){
+    public function __construct($konfiguraatio = 'konfiguraatio.ini'){
         $this->konfiguraatio = $konfiguraatio;
     }
 
@@ -18,12 +18,12 @@ class YhteydenHallinta{
         $init = parse_ini_file($this->konfiguraatio, true);
 
         // Alustetaan tietokannan avaamiseen liittyvät omianaisuudet
-        $ajuri = $init['harjoitukset']['ajuri'];
-        $palvelin = $init['harjoitukset']['palvelin'];
-        $portti = $init['harjoitukset']['portti'];
-        $kanta = $init['harjoitukset']['kanta'];
-        $kayttaja = $init['harjoitukset']['kayttaja'];
-        $salasana = $init['harjoitukset']['salasana'];
+        $ajuri = $init['linkit']['ajuri'];
+        $palvelin = $init['linkit']['palvelin'];
+        $portti = $init['linkit']['portti'];
+        $kanta = $init['linkit']['kanta'];
+        $kayttaja = $init['linkit']['kayttaja'];
+        $salasana = $init['linkit']['salasana'];
         $url = "{$ajuri}:host={$palvelin};port={$portti};dbname={$kanta}";
 
         // try-lohkoon tulee se koodi, joka voi aiheuttaa kriittisen virheen
@@ -62,6 +62,29 @@ class YhteydenHallinta{
 
         // Palautetaan tulosjoukko
         return $tulosjoukko;
+
+    }
+    //metodi kutsutaan kun suoritetaan lisäys(insert), poisto(delete) tai päivitys(update)
+    public function suoritaPaivitysLause($sqlLause, $parametritaulukko = Array()){
+        //avaa tietokantayhteys
+        $this->avaaYhteys();
+
+        try{
+            //Valmistellaan SQL-lause
+            $suoritettavaLause = $this->yhteys->prepare($sqlLause);
+            //Suoritetaan sql-lause palvelimella
+            $suoritettavaLause->execute($parametritaulukko);
+            //Palauttaa tietueiden määrän (0=ei tietuetta)
+            $lkm = $suoritettavaLause->rowCount();
+            // Suljetaan tietokantayhteys
+            $this->suljeYhteys();
+
+        }
+        catch(PDOException $e){
+            $lkm = 0;
+        }
+        //Palautetaan tietueiden määrä
+        return $lkm;
 
     }
 

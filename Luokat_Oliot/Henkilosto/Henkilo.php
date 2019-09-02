@@ -9,7 +9,7 @@ class Henkilo {
    // Tietokantaa varten
    private $yhteydenhallinta;
    // void tarkoittaa että funktio ei palauta mitään
-   public function setHenkilonumero($henkilonumero) : void
+   public function setHenkilonumero($henkilonumero)
    {
        $this->henkilonumero = $henkilonumero;
    }
@@ -49,5 +49,12 @@ class Henkilo {
    public function haeKaikkiHenkilot(){
        return $this->yhteydenhallinta->suoritaHakuLause("select * from henkilosto");
    }
+   public function lisaaHenkilo(){
+       return $this->yhteydenhallinta->suoritaPaivitysLause(
+           "insert into henkilosto(henkilonumero, etunimi, sukunimi, osasto, palkka)
+           values (?,?,?,?,?)", 
+           Array($this->henkilonumero, $this->etunimi, $this->sukunimi, $this->osasto, $this->palkka)
+       );
+    }
 }
 ?>

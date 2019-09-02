@@ -66,7 +66,7 @@ Class Linkki {
     public function luoYhteysTietokantaan()
     {
         //viittaus luokkaan YHteydenHallinta
-        include("../Henkilosto/YhteydenHallinta.php");
+        include("YhteydenHallinta.php");
         // Yhteys tietokantaan
         $this->yhteydenhallinta = new YhteydenHallinta();
     }

@@ -43,7 +43,7 @@
     <?php
       // Tulostetaan kaikki henkilöt
       foreach($henkilot as $henkilo){
-        $id = $henkilo['henkilonumero'];
+        $id = $henkilo['henkilonumero']; //tallennetaan muuttujaan jotta koodi kauniimpaa
     ?>
       <tr>
         <td><?php echo $id ?></th>

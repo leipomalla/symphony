@@ -23,7 +23,9 @@
     $linkkisivu = new Linkki();
 
     $linkkisivu->luoYhteysTietokantaan();
-    print $kaikkilinkit = $linkkisivu->haeKaikkiLinkit();
+    $kaikkilinkit = $linkkisivu->haeKaikkiLinkit();
+    //var_dump($kaikkilinkit);
+
 
 
     ?>
@@ -44,15 +46,15 @@
             <?php
             // Tulostetaan kaikki linkit
             foreach ($kaikkilinkit as $linkki) {
-                $id = $linkki['id'];
+                $osoite = $linkki['id'];
                 ?>
                 <tr>
-                    <td><?php echo $id ?></th>
+                    <td><?php echo $linkki['id'] ?></td>
                     <td><?php echo $linkki['linkki'] ?></td>
-                    <td><?php echo $otsikko['otsikko'] ?></td>
-                    <td><?php echo $kuvaus['kuvaus'] ?></td>
-                    <td><?php echo $avainsana['avainsana'] ?></td>
-                    <td><button > Muuta</td>
+                    <td><?php echo $linkki['otsikko'] ?></td>
+                    <td><?php echo $linkki['kuvaus'] ?></td>
+                    <td><?php echo $linkki['avainsana'] ?></td>
+                    <td><button> Muuta</td>
 
                 <?php
                 }

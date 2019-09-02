@@ -1,6 +1,7 @@
 <?php
 
-class YhteydenHallinta{
+class YhteydenHallinta
+{
 
     // Tietokantayhteys talletetaan tähän ominaisuuteen
     private $yhteys;
@@ -8,12 +9,14 @@ class YhteydenHallinta{
     // Tietokannan tiedot on talletettu tähän ominaisuuteen
     private $konfiguraatio;
 
-    public function __construct($konfiguraatio = 'yhteyskonfiguraatio.ini'){
+    public function __construct($konfiguraatio = 'yhteyskonfiguraatio.ini')
+    {
         $this->konfiguraatio = $konfiguraatio;
     }
 
     // Avaa tietokantayhteyden
-    private function avaaYhteys(){
+    private function avaaYhteys()
+    {
         // Purkaa ini-tiedoston taulukoksi
         $init = parse_ini_file($this->konfiguraatio, true);
 
@@ -28,13 +31,17 @@ class YhteydenHallinta{
 
         // try-lohkoon tulee se koodi, joka voi aiheuttaa kriittisen virheen
         // ja catch-lohkoon hypätään jos tulee virhee
-        try{
+        try {
             // Luo yhteyden tietokantaan PDO-olion avulla
-            $this->yhteys = new PDO($url, $kayttaja, $salasana, 
-            array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+            $this->yhteys = new PDO(
+                $url,
+                $kayttaja,
+                $salasana,
+                array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
+            );
             // Palauttaa tietokantayhteyden
             return $this->yhteys;
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             // Tännen hypätään jos tulee virhe
             echo $e->getMessage();
             // Siirrytään virhesivulle
@@ -43,7 +50,8 @@ class YhteydenHallinta{
     }
 
     // Suorittaa SQL-kyselyjä
-    public function suoritaHakuLause($sqlLause, $parametritaulukko = Array()){
+    public function suoritaHakuLause($sqlLause, $parametritaulukko = array())
+    {
         // Avataan tietokantayhteys
         $this->avaaYhteys();
 
@@ -62,13 +70,31 @@ class YhteydenHallinta{
 
         // Palautetaan tulosjoukko
         return $tulosjoukko;
+    }
+    //metodi kutsutaan kun suoritetaan lisäys(insert), poisto(delete) tai päivitys(update)
+    public function suoritaPaivitysLause($sqlLause, $parametritaulukko = array())
+    {
+        //avaa tietokantayhteys
+        $this->avaaYhteys();
 
+        try {
+            //Valmistellaan SQL-lause
+            $suoritettavaLause = $this->yhteys->prepare($sqlLause);
+            //Suoritetaan sql-lause palvelimella
+            $suoritettavaLause->execute($parametritaulukko);
+            //Palauttaa tietueiden määrän (0=ei tietuetta)
+            $lkm = $suoritettavaLause->rowCount();
+            // Suljetaan tietokantayhteys
+            $this->suljeYhteys();
+        } catch (PDOException $e) {
+            $lkm = 0;
+        }
+        //Palautetaan tietueiden määrä
+        return $lkm;
     }
 
-    private function suljeYhteys(){
+    private function suljeYhteys()
+    {
         $this->yhteys = null;
     }
-
 }
-
-?>
