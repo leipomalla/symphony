@@ -15,8 +15,7 @@ class YhteydenHallinta
     }
 
     // Avaa tietokantayhteyden
-    private function avaaYhteys()
-    {
+    private function avaaYhteys(){
         // Purkaa ini-tiedoston taulukoksi
         $init = parse_ini_file($this->konfiguraatio, true);
 
@@ -50,8 +49,7 @@ class YhteydenHallinta
     }
 
     // Suorittaa SQL-kyselyjä
-    public function suoritaHakuLause($sqlLause, $parametritaulukko = array())
-    {
+    public function suoritaHakuLause($sqlLause, $parametritaulukko = array()){
         // Avataan tietokantayhteys
         $this->avaaYhteys();
 
@@ -93,8 +91,7 @@ class YhteydenHallinta
         return $lkm;
     }
 
-    private function suljeYhteys()
-    {
+    private function suljeYhteys(){
         $this->yhteys = null;
     }
 }

@@ -40,21 +40,25 @@ class Henkilo {
    public function getPalkka(){
        return $this->palkka;
    }
-   public function luoYhteysTietokantaan(){
-       //viittaus luokkaan YHteydenHallinta
-       include("YhteydenHallinta.php");
-       // Yhteys tietokantaan
-       $this->yhteydenhallinta = new YhteydenHallinta();
-   }
-   public function haeKaikkiHenkilot(){
-       return $this->yhteydenhallinta->suoritaHakuLause("select * from henkilosto");
-   }
-   public function lisaaHenkilo(){
-       return $this->yhteydenhallinta->suoritaPaivitysLause(
-           "insert into henkilosto(henkilonumero, etunimi, sukunimi, osasto, palkka)
-           values (?,?,?,?,?)", 
-           Array($this->henkilonumero, $this->etunimi, $this->sukunimi, $this->osasto, $this->palkka)
-       );
+
+    public function luoYhteysTietokantaan()
+    {
+        //viittaus luokkaan YHteydenHallinta
+        include("YhteydenHallinta.php");
+        // Yhteys tietokantaan
+        $this->yhteydenhallinta = new YhteydenHallinta();
+    }
+    public function haeKaikkiHenkilot()
+    {
+        return $this->yhteydenhallinta->suoritaHakuLause("select * from henkilosto");
+    }
+    public function lisaaHenkilo()
+    {
+        return $this->yhteydenhallinta->suoritaPaivitysLause(
+            "insert into henkilosto(henkilonumero, etunimi, sukunimi, osasto, palkka)
+           values (?,?,?,?,?)",
+            array($this->henkilonumero, $this->etunimi, $this->sukunimi, $this->osasto, $this->palkka)
+        );
     }
 }
 ?>
