@@ -3,7 +3,7 @@
 include "Henkilo.php";
 
 //Luodaan Henkilo-olio
-$henkilo = new Henkilo();
+$person= new Henkilo();
 
 //Asetetaan lomakkeelta tulleet tiedot muuttujiin
 $henkilo->setHenkilonumero($_POST['henkilonumero']);
