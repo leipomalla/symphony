@@ -14,11 +14,11 @@
 </head>
 
 <body>
-    <h1 style="margin-left: 25px; margin-top: 20px;">Energiamuunnin</h1>
+    <h1 style="margin-left: 25px; margin-top: 20px;">Muunnin</h1>
 
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?> " style="margin-left:15px;">
 
-        <input type="text" placeholder="Laske ympyrän pinta-ala" name="sade" style="margin-left:15px;">
+        <input type="text" placeholder="Anna säteen pituus" name="sade" style="margin-left:15px;">
         <input type="submit" class="btn btn-info" value="Laske ympyrän pinta-ala" name="laske">
         <?php
         $muunnin = new Matikka();
@@ -27,12 +27,15 @@
                     
                     //$sade = $_POST['sade'];
                     $sade = isset($_POST['sade']) ? $_POST['sade'] : '';
-                    if ($sade < 0) {
+                    
+                     
+                     if ($sade < 0) {
                         echo "<p>Syötä positiivinen säteen arvo</p>";
                     } else {
                     
                     echo "<p>Säde : $sade </p>";
-                    echo "<p>Ympyrän pinta-ala : " . $muunnin->ympyra($sade) . "</p>";
+                    echo "<p>Ympyrän pinta-ala: " . $muunnin->ympyra($sade) . "</p>";
+                     
                     }
                     
                 }?>

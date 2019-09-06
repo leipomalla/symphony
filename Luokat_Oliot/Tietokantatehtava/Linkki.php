@@ -30,10 +30,10 @@ Class Linkki {
     private $kuvaus;
     private $avainsana;
 
-    public function __construct($tunniste){
+    /*public function __construct($tunniste){
         $this->id = $tunniste;
 
-    }
+    }*/
     public function setLinkki($address){
        $this->linkki =  $address;
     }
@@ -62,6 +62,17 @@ Class Linkki {
         echo "Linkin id on " . $this->id . ", osoite " . $this->getLinkki() .". 
         Sivun otsikko on " . $this->getOtsikko() . ". <br> Sivun kuvaus: " . $this->getKuvaus()
         . ". Avainsana: " . $this->getAvainsana() . ".";
+    }
+    public function luoYhteysTietokantaan()
+    {
+        //viittaus luokkaan YHteydenHallinta
+        include("YhteydenHallinta.php");
+        // Yhteys tietokantaan
+        $this->yhteydenhallinta = new YhteydenHallinta();
+    }
+    public function haeKaikkiLinkit()
+    {
+        return $this->yhteydenhallinta->suoritaHakuLause("select * from linkit");
     }
 
 }
